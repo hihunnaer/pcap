@@ -1,0 +1,47 @@
+注意事項: 產生後的pcap 需要實際傳送後才知道正確與否
+
+
+A. prod_pcap: 產生Input的pcap 
+#第9~16行: 
+- timestamp pcap需要, 不是來自I081 (逐筆行情資訊傳輸作業手冊)
+- 其他, 請與I081 (逐筆行情資訊傳輸作業手冊) 對照
+#第21行:
+- data: 一個list, 存放要用到的資料
+#第23行:
+- 分析每行數據的部分---可能有錯誤
+#第60/61行:
+- sign: 30='0'  31='1'(買)  32='2'(賣)
+#第78行:
+- 創建 Raw 資料層: hex_data = 對應的格式  
+#第96行:
+- wrpcap: 可自行命名pcap檔
+           
+
+B. read_pcap: 讀懂pcap
+#第4行:
+- 請輸入要解析pcap檔的名稱
+- 解析前後檔案名稱只差在副檔名: .pcap -> .txt (txt中的 Raw 對應到 prod_pcap中的hex_data)
+
+
+
+C. 操作
+第一部分. 架設python環境 (透過輸入指令 / 需要網路)
+   Open Anaconda Prompt
+-> Enter "conda create --name pcap python=3.10"
+-> y
+-> conda activate pcap (activate)
+-> 移動到 prod_pcap 所在資料夾
+-> pip install -r requirement.txt (安裝其中的套件) 出現"Successfully installed"
+第二部分. 執行
+   Visual Studio Code
+-> 打開 prod_pcap 所在資料夾
+-> Select interpreter (you set)
+-> Run prod_pcap
+# 印出結果為3行一組: 
+251: timestamp轉換結果
+final_timestamp_hex: 轉16進位後印出來看
+hex_data
+
+
+
+
